@@ -1,5 +1,45 @@
 @enum ResponseType RELATIVE ABSOLUTE
 
+type Led <: Control
+    info::ControlInfo
+    min::Float64
+    max::Float64
+end
+
+function Led(;min=0.0, max=1.0, kwargs...)
+    Led(ControlInfo(; kwargs...), min, max)
+end
+
+typestring(::Led, landscape::Bool) = "led"
+
+function addxmlinfo!(xml, led::Led)
+    set_attribute(xml, "scalef", led.min)
+    set_attribute(xml, "scalet", led.max)
+
+    nothing
+end
+
+type Push <: Control
+    info::ControlInfo
+    onval::Float64
+    offval::Float64
+    local_off::Bool
+end
+
+function Push(;offval=0.0, onval=1.0, local_off=false, kwargs...)
+    Push(ControlInfo(; kwargs...), onval, offval, local_off)
+end
+
+typestring(::Push, landscape::Bool) = "push"
+
+function addxmlinfo!(xml, tog::Push)
+    set_attribute(xml, "scalef", tog.offval)
+    set_attribute(xml, "scalet", tog.onval)
+    set_attribute(xml, "local_off", tog.local_off)
+
+    nothing
+end
+
 type Toggle <: Control
     info::ControlInfo
     onval::Float64

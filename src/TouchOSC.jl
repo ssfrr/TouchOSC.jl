@@ -1,7 +1,7 @@
 module TouchOSC
 
 export Layout, Page
-export Toggle, Fader, Label, Encoder
+export Led, Push, Toggle, Fader, Label, Encoder
 export VERTICAL, HORIZONTAL
 export IPHONE, IPAD, IPHONE5, IPHONE6, IPHONE6PLUS, IPADPRO
 export RED, GREEN, BLUE, YELLOW, PURPLE, GRAY, ORANGE, BROWN, PINK
